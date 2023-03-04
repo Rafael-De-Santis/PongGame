@@ -3,6 +3,9 @@ const playerRight = document.getElementById("playerRight");
 const playerLeft = document.getElementById("playerLeft");
 const field = document.getElementById("field");
 const ball = document.getElementById("ball");
+const scoreLeft = document.getElementById("scoreLeft");
+const scoreRight = document.getElementById("scoreRight");
+
 
 let maxWidth = field.offsetWidth;
 let maxHeight = field.offsetHeight;
@@ -12,7 +15,11 @@ let playerRightHeight = playerRight.offsetHeight;
 let playerLeftWidth = playerLeft.offsetWidth;
 let playerRightWidth = playerRight.offsetWidth;
 
+let borderBottom = maxHeight - 24
+let borderTop = 0
 
+var scoreL = 0;
+var scoreR = 0;
 
 // var ballPos = ballX + ballY;
 
@@ -66,43 +73,134 @@ window.addEventListener("keydown", (element) => {
 })
 
 //Ball Movement----------------------------------------------------
-var coordinate = "E";
+var coordinateX = "E";
+var coordinateY = ""
 
-function ballXMove () {
+function ballMove () {
 
     var currentPosPRX = playerRight.offsetLeft - playerRightWidth;
     var currentPosPRY = playerRight.offsetTop;
+
     var currentPosPLX = playerLeft.offsetLeft + playerLeftWidth;
     var currentPosPLY = playerLeft.offsetTop;
 
-    if(coordinate == "E"){
+    if(coordinateX == "E"){
         ballX = ballX + 2;
         ball.style.left = ballX + "px";
-        console.log("ballX: " + ballX);
+        //console.log("ballX: " + ballX);
         console.log("ballY: " + ballY);
-        console.log("PlayerX: " + currentPosPRX);
-        console.log("PlayerY: " + currentPosPRY);
+      /*   console.log("PlayerX: " + currentPosPRX);
+        console.log("PlayerY: " + currentPosPRY); */
         if (ballX == currentPosPRX && ballY >= currentPosPRY && ballY <= currentPosPRY + playerRightHeight) {
-            coordinate = "W";
+            coordinateX = "W";
+
+           var numR =  Math.round(Math.random())
+            if (numR == 1) {
+                coordinateY = "N"
+                console.log("pa arriba")
+            } else {
+                coordinateY = "S"
+                console.log("pa abajo")
+            }
         }
         // console.log("estamos en la E") 
     }
 
-    if(coordinate == "W"){
+    if(coordinateX == "W"){
         ballX = ballX - 2;
         ball.style.left = ballX + "px";
-        // console.log(ballX);
+        console.log("ballY: " + ballY);
         if (ballX == currentPosPLX && ballY >= currentPosPLY && ballY <= currentPosPLY + playerLeftHeight) {
-            coordinate = "E";
+            coordinateX = "E";
+
+            var numR =  Math.round(Math.random())
+            if (numR == 1) {
+                coordinateY = "N"
+                console.log("pa arriba")
+            } else {
+                coordinateY = "S"
+                console.log("pa abajo")
+            }
         }
     }
 
+    if (coordinateY == "N") {
+        ballY = ballY - 1;
+        ball.style.top = ballY + "px";
+        if(ballY == borderTop){
+            coordinateY = "S";
+        }
+    }
+
+    if (coordinateY == "S") {
+        ballY = ballY + 1;
+        ball.style.top = ballY + "px";
+        if(ballY == borderBottom){
+            coordinateY = "N";
+        }
+    }
+
+
+    if (ballX == 0) {
+
+     
+        eraseBall();
+
+        setTimeout(ballInit, 1000);
+
+        scoreL++
+        scoreLeft.textContent = scoreL;
+
+    }
+
+    if (ballX == maxWidth - 10) {
+
+     
+        eraseBall();
+
+        setTimeout(ballInit, 1000);
+
+        scoreR++
+        scoreRight.textContent = scoreR;
+
+    }
     
 
-    setTimeout(ballXMove, 10);
+
+
+    setTimeout(ballMove, 10);
 }
 
-ballXMove()
+ballMove()
 
+function ballInit() {
+    var numeroloquesea = Math.round(Math.random())
+
+    if (numeroloquesea == 1) {
+        
+        coordinateX = "E";
+
+    } else {
+
+        coordinateX = "W";
+    }
+
+    coordinateY = "";
+
+}
+
+
+function eraseBall() {
+
+    coordinateX = "";
+    coordinateY = "";
+
+    ballX = maxWidth / 2;
+    ballY = maxHeight / 2;
+
+    ball.style.left = ballX + "px"
+    ball.style.top = ballY + "px"
+
+}
 
 
