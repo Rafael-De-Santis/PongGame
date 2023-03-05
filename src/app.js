@@ -5,6 +5,8 @@ const field = document.getElementById("field");
 const ball = document.getElementById("ball");
 const scoreLeft = document.getElementById("scoreLeft");
 const scoreRight = document.getElementById("scoreRight");
+const startBtn = document.getElementById("startBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 
 let maxWidth = field.offsetWidth;
@@ -75,6 +77,24 @@ window.addEventListener("keydown", (element) => {
 //Ball Movement----------------------------------------------------
 var coordinateX = "E";
 var coordinateY = ""
+
+startBtn.addEventListener("click", () => {
+    ballMove()
+})
+
+resetBtn.addEventListener("click", () => {
+    scoreLeft.textContent = 0;
+    scoreRight.textContent = 0;
+
+    eraseBall();
+
+    setTimeout(ballInit, 1000);
+
+    playerRight.style.top = playerInit + "px";
+    playerLeft.style.top = playerInit + "px";
+
+
+})
 
 function ballMove () {
 
@@ -171,7 +191,6 @@ function ballMove () {
     setTimeout(ballMove, 10);
 }
 
-ballMove()
 
 function ballInit() {
     var numeroloquesea = Math.round(Math.random())

@@ -15,7 +15,8 @@
         4. Create the middle field (the LINE)
         5. Create the ball, the pong, the little white thing.
     -->
-    <div id="field" class="bg-black absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-96 h-60 md:w-96 md:h-60 border-t-8 border-b-8 border-l-2 border-r-2 border-gray-300 grid grid-cols-2 divide-x-8 divide-dashed divide-gray-300">
+<div class="container">
+    <div id="field" class="absolute bg-black -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-96 h-60 md:w-96 md:h-60 border-t-8 border-b-8 border-l-2 border-r-2 border-gray-300 grid grid-cols-2 divide-x-8 divide-dashed divide-gray-300">
         <!--<div class="border-l-8 border-white border-dashed absolute left-1/2 right-1/2 -ml-0.5 w-0.5 h-full "></div>-->
         <!--
        
@@ -32,6 +33,12 @@
         </div>
     </div>
 
+    <div class="absolute -translate-x-1/2 left-1/2 bottom-5 flex justify-between">
+        <button id="startBtn" class="mr-5 bg-gray-500 rounded-sm p-1 text-white hover:bg-slate-700 hover:transition duration-300 ease-in-out active:bg-slate-800">START</button>
+        <button id="resetBtn" class="ml-5 bg-gray-500 rounded-sm p-1 text-white hover:bg-slate-700 hover:transition duration-300 ease-in-out active:bg-slate-800">RESET</button>
+    </div>
+
+</div>
     <script src="app.js"></script>
 </body>
 </html>
